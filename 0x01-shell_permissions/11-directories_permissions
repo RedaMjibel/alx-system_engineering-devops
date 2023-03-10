@@ -1,3 +1,2 @@
 #!/bin/bash
-u+rwx,g+x hello
-||
+chmod ugo+x ./*/
