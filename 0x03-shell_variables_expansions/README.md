@@ -1,2 +1,2 @@
-#shell_variables_expansions
-alias
+#shel_variables
+and expansions
