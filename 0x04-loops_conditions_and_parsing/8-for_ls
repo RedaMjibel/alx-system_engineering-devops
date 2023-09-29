@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#displays The content of the current directory
+
+for file in *
+do
+	if [[ $file == *-* ]]
+	then
+		fnodash=$(echo "$file" | awk -F'-' '{print $2}')
+		echo "$fnodash"
+	fi
+done
