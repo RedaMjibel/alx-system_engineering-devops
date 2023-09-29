@@ -4,7 +4,7 @@
 for file in *
 do
 
-    if [[ $file != .* && $file == *-* ]]
+    if [[ $file != .* && $file == *-* ]];
     then
 
         part_after_dash=$(echo "$file" | awk -F'-' '{print $2}')
