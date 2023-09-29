@@ -6,7 +6,6 @@ do
 
     if [[ $file != .* && $file == *-* ]];
     then
-
         part_after_dash=$(echo "$file" | awk -F'-' '{print $2}')
         echo "$part_after_dash"
     fi
