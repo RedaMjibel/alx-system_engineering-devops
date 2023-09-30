@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
-#stops 4-to_infinity_and_beyond process
 
-pkill "4-to_infinity_and_beyond"
+if pkill -f "4-to_infinity_and_beyond"; then
+	echo "Process terminated"
+else
+    echo "Process '4-to_infinity_and_beyond' is not running."
+fi
+
