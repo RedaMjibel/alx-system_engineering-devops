@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#displays the content of the file /etc/passw
+
+passwd_dir="/etc/passwd"
+
+while IFS=: read -f username _ userid _ _ home_directory _ _; do
+	echo "$username:x:$userid:$_:$_:$home_directory:$_"
+done < "$passwd_dir"
