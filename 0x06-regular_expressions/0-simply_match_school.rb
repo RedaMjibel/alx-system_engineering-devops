@@ -10,5 +10,5 @@ match = input.match(pattern)
 if match
   puts "#{match[0]}"
 else
-  puts "No match found."
+  puts ""
 end
