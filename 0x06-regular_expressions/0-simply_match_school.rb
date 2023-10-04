@@ -3,12 +3,12 @@
 
 input = ARGV[0]
 
-pattern = /School/
+pattern = /School+/
 
-match = input.match(pattern)
+match = input.scan(pattern)
 
-if match
-  puts "#{match[0]}"
+if match.any?
+  puts "#{match.join('')}"
 else
   puts ""
 end
