@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#fixes a problem where curl 0:80 doesn't work
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx start
