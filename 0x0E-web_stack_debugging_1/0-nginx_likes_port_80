@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#fixes a problem where curl 0:80 doesn't work
+
+sudo ufw allow 80
