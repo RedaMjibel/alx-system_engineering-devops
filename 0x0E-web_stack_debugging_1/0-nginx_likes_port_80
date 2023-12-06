@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 #fixes a problem where curl 0:80 doesn't work
 
-string1="listen 80 default_server;"
-string2="listen 8080 default_server;"
-sudo sed -i "s/$string1/$string2/" /etc/nginx/sites-enabled/default
-sudo sed -i '22d' /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/enginx/sites-enabled/default
 sudo service nginx start
