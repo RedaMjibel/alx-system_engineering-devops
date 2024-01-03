@@ -28,7 +28,7 @@ if __name__ == "__main__":
         if tasks_done['completed']:
             tasks = tasks + 1
 
-    print("Employee {} is done with tasks ({}/{}):".
+    print("Employee {} is done with tasks({}/{}):".
           format(name_json, tasks, total_tasks))
 
     for tasks_done in comp_json:
