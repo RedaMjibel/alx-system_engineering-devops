@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Returns information about his/her TODO list progress and exports data in CSV format.
+Returns information about his/her TODO list progress and
+exports data in CSV format.
 """
 import csv
 import json
@@ -22,7 +23,6 @@ if __name__ == "__main__":
 
     tasks = 0
     total_tasks = len(comp_json)
-
 
     csv_rows = []
 
@@ -47,9 +47,10 @@ if __name__ == "__main__":
     csv_filename = '{}.csv'.format(idarg)
     with open(csv_filename, 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
-        
-        csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-        
+
+        csv_writer.writerow(["USER_ID", "USERNAME",
+                             "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+
         csv_writer.writerows(csv_rows)
 
     print('Data exported to {}'.format(csv_filename))
