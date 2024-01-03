@@ -33,4 +33,3 @@ if __name__ == "__main__":
     for tasks_done in comp_json:
         if tasks_done['completed']:
             print("\t " + tasks_done.get('title'))
-
