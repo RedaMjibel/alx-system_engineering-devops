@@ -1,23 +1,35 @@
 #!/usr/bin/python3
-"""Returns to-do list information for a given employee ID."""
+"""
+returns information about his/her TODO list progress.
+"""
 import json
-import requests as r
-import sys
+import requests
+from sys import argv
 
 if __name__ == "__main__":
 
-    url = "https://jsonplaceholder.typicode.com/"
+    mysession = requests.Session()
+    idarg = argv[1]
 
+    idurl = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idarg)
+    nameurl = 'https://jsonplaceholder.typicode.com/users/{}'.format(idarg)
 
-    user = r.get(url + "users/{}".format(sys.argv[1])).json()
-    todos = r.get(url + "todos", params={"userId": sys.argv[1]}).json()
+    empid = mysession.get(idurl)
+    empname = mysession.get(nameurl)
 
+    comp_json = empid.json()
+    name_json = empname.json()['name']
 
-    completed = [t.get("title") for t in todos if t.get("completed") is True]
+    tasks = 0
+    total_tasks = len(comp_json)
 
+    for tasks_done in comp_json:
+        if tasks_done['completed']:
+            tasks = tasks + 1
 
-    print("Employee {} is done with tasks({}/{}):".format(
-        user.get("name"), len(completed), len(todos)))
+    print("Employee {} is done with tasks({}/{}):".
+          format(name_json, tasks, total_tasks))
 
-
-    [print("\t {}".format(c)) for c in completed]
+    for tasks_done in comp_json:
+        if tasks_done['completed']:
+            print("\t " + tasks_done.get('title'))
