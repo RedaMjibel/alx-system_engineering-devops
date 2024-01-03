@@ -1,35 +1,33 @@
 #!/usr/bin/python3
-"""
-returns information about his/her TODO list progress.
-"""
-import json
+""" given employee ID, returns information about his/her TODO list progress """
 import requests
 from sys import argv
 
+
 if __name__ == "__main__":
-
-    mysession = requests.Session()
-    idarg = argv[1]
-
-    idurl = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idarg)
-    nameurl = 'https://jsonplaceholder.typicode.com/users/{}'.format(idarg)
-
-    empid = mysession.get(idurl)
-    empname = mysession.get(nameurl)
-
-    comp_json = empid.json()
-    name_json = empname.json()['name']
-
-    tasks = 0
-    total_tasks = len(comp_json)
-
-    for tasks_done in comp_json:
-        if tasks_done['completed']:
-            tasks = tasks + 1
-
-    print("Employee {} is done with tasks({}/{}):".
-          format(name_json, tasks, total_tasks))
-
-    for tasks_done in comp_json:
-        if tasks_done['completed']:
-            print("\t " + tasks_done.get('title'))
+    """ main code """
+    r_info = requests.get(
+        "https://jsonplaceholder.typicode.com/todos").json()
+    r_users = requests.get(
+        "https://jsonplaceholder.typicode.com/users").json()
+    r_user_dict = list(
+        filter(
+            lambda elem: elem.get("id") == int(
+                argv[1]),
+            r_users))[0]
+    user = r_user_dict.get('name')
+    r_info_filtered = list(
+        filter(
+            lambda elem: elem.get('userId') == int(
+                argv[1]),
+            r_info))
+    done = list(
+        filter(
+            lambda elem: elem.get('completed'),
+            r_info_filtered))
+    num_task = len(done)
+    total_num_task = len(r_info_filtered)
+    print("Employee {} is done with ".format(user), end='')
+    print('tasks({}/{}):'.format(num_task, total_num_task))
+    for i in done:
+        print('\t {}'.format(i.get('title')))
