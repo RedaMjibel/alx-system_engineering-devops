@@ -1,28 +1,28 @@
 #!/usr/bin/python3
-
 """
- queries the Reddit API and returns the number of subscribers
+Queries the Reddit API and prints the titles of the first 10 hot posts listed
+for a given subreddit.
 """
-
 import requests
-import json
 
 
 def top_ten(subreddit):
-    """
-    documentation
-    """
-    headers = {
-            "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/elbatouri)"
-    }
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    user_agent = 'elbatouri/1.0'
+    client_id = 'WqSQ8WwNC9Y6ixCB1Gx9sA'
+    headers = {'User-Agent': user_agent,
+               'Authorization': f'Client-ID {client_id}'}
+    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
 
-    req = requests.get(url, headers=headers, params={"limit": 10})
+    try:
+        response = requests.get(url, headers=headers,
+                                allow_redirects=False).json()
 
-    if req.status_code == 200:
-        for get_data in req.json().get("data").get("children"):
-            dat = get_data.get("data")
-            title = dat.get("title")
-            print(title)
-    else:
+        if response.get('data') and response.get('data').get('children'):
+            children = response['data']['children']
+
+            for i in range(min(10, len(children))):
+                print(children[i]['data']['title'])
+        else:
+            print(None)
+    except Exception as e:
         print(None)
