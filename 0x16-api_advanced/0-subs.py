@@ -13,7 +13,7 @@ def number_of_subscribers(subreddit):
     documentation
     """
     headers = {
-            "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+            "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/elbatouri)"
     }
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
