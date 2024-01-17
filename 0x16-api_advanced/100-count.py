@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """
-parses the title of all hot articles, and prints a sorted count of given keywords
+parses the title of all hot articles, and prints
+a sorted count of given keywords
 """
 
 import requests
 import json
 from requests import get
+
 
 def count_words(subreddit, word_list, word_count=[], page_after=None):
     """
@@ -60,7 +62,7 @@ def count_words(subreddit, word_list, word_count=[], page_after=None):
                     i = word_list.index(key_word)
                     if word_count[i] != 0:
                         dict[word_list[i]] = (word_count[i] *
-                                               word_list.count(word_list[i]))
+                                              word_list.count(word_list[i]))
 
                 for key, value in sorted(dict.items(),
                                          key=lambda x: (-x[1], x[0])):
