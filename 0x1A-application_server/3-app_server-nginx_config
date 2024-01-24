@@ -8,9 +8,14 @@ server {
     # HTTP response header as the name of web-01
     add_header X-Served-By 386468-web-01;
 
-    # serves /airbnb-onepage/ route from localhost aswell as ip adress
+    # Serves /airbnb-onepage/ route from localhost aswell as ip adress
     location = /airbnb-onepage/ {
         proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+    }
+
+    # Serves /number_odd_or_even/ route plus a number at the end
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
     }
 
     error_page 404 /404.html;
